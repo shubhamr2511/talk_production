@@ -97,7 +97,7 @@ function init() {
 		if (peer_id in peers) return;
 
 		channel = config.channel;
-		//console.log('[Join] - connected peers in the channel', JSON.stringify(channel, null, 2));
+		console.log('[Join] - connected peers in the channel', JSON.stringify(channel, null, 2));
 
 		const peerConnection = new RTCPeerConnection({ iceServers: ICE_SERVERS });
 		peers[peer_id] = peerConnection;

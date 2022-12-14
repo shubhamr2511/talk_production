@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "icons")));
 app.use(express.static(path.join(__dirname, "node_modules/vue/dist/")));
 
 // Get PORT from env variable else assign 3000 for development
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 
 // Get NGROK_AUTH_TOKEN from env variable: https://ngrok.com
 const NGROK_AUTH_TOKEN = process.env.NGROK_AUTH_TOKEN || "";
