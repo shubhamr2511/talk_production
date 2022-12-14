@@ -323,7 +323,8 @@ const getVideoElement = (peerId, isLocal) => {
 	videoWrap.appendChild(peerNameEle);
 	videoWrap.appendChild(fullScreenBtn);
 	videoWrap.appendChild(videoAvatarImg);
-	document.getElementById("videos").appendChild(videoWrap);
+	if(document.getElementById("videos").childElementCount<1)
+	{document.getElementById("videos").appendChild(videoWrap);}
 	return media;
 };
 
