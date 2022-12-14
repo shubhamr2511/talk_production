@@ -334,6 +334,9 @@ const getVideoElement = (peerId, isLocal) => {
 	videoWrap.appendChild(fullScreenBtn);
 	videoWrap.appendChild(videoAvatarImg);
 	document.getElementById("videos").appendChild(videoWrap);
+	if(peerId==App.peerId){
+		document.getElementById("videos").removeChild(videoWrap);
+	}
 	return media;
 }
 };
