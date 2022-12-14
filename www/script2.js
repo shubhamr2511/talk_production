@@ -65,12 +65,15 @@ function init() {
 			isIpad: App.isIpad,
 			isDesktop: App.isDesktop,
 		};
-
+		
 		if (localMediaStream) joinChatChannel(ROOM_ID, userData);
-		else
+		else {
 			setupLocalMedia(function () {
 				joinChatChannel(ROOM_ID, userData);
+
 			});
+		}
+		
 	});
 
 	signalingSocket.on("disconnect", function () {
@@ -113,6 +116,7 @@ function init() {
 				});
 			}
 		};
+		console.log("no of peers",Object.keys(channel).length);
 
 		peerConnection.onaddstream = function (event) {
 			const remoteMedia = getVideoElement(peer_id);
@@ -240,7 +244,11 @@ function init() {
 	});
 }
 
-const attachMediaStream = (element, stream) => (element.srcObject = stream);
+const attachMediaStream = (element, stream) => {
+	
+	return (element.srcObject = stream);
+
+};
 
 function setupLocalMedia(callback, errorback) {
 	if (localMediaStream != null) {
@@ -270,6 +278,8 @@ function setupLocalMedia(callback, errorback) {
 }
 
 const getVideoElement = (peerId, isLocal) => {
+	if ( Object.keys(channel).length==0 || peerId == Object.keys(channel)[0]) {
+		console.log("video of", peerId)
 	const videoWrap = document.createElement("div");
 	videoWrap.className = "video";
 
@@ -323,9 +333,9 @@ const getVideoElement = (peerId, isLocal) => {
 	videoWrap.appendChild(peerNameEle);
 	videoWrap.appendChild(fullScreenBtn);
 	videoWrap.appendChild(videoAvatarImg);
-	if(document.getElementById("videos").childElementCount<1)
-	{document.getElementById("videos").appendChild(videoWrap);}
+	document.getElementById("videos").appendChild(videoWrap);
 	return media;
+}
 };
 
 const resizeVideos = () => {
@@ -335,6 +345,8 @@ const resizeVideos = () => {
 		v.className = "video " + numToString[videos.length];
 	});
 };
+
+const noOfVideos = () =>  document.querySelectorAll("#videos .video").length;
 
 document.addEventListener("click", () => {
 	if (!App.showChat && !App.showSettings && !App.showIntro) {

@@ -113,7 +113,7 @@ io.sockets.on("connection", (socket) => {
 		peers[channel][socket.id] = {
 			userData: config.userData,
         };
-
+		// console.log("@@", Object.keys(peers[channel]).length);
 		console.log("[" + socket.id + "] join - connected peers grouped by channel", util.inspect(peers, options));
 
 		for (const id in channels[channel]) {
@@ -149,7 +149,7 @@ io.sockets.on("connection", (socket) => {
 			// last peer disconnected from the channel
 			delete peers[channel]; 
 		}
-		console.log("[" + socket.id + "] part - connected peers grouped by channel", util.inspect(peers, options));
+		// console.log("[" + socket.id + "] part - connected peers grouped by channel", util.inspect(peers, options));
 
 		for (const id in channels[channel]) {
 			channels[channel][id].emit("removePeer", { peer_id: socket.id });
@@ -160,7 +160,7 @@ io.sockets.on("connection", (socket) => {
 	socket.on("relayICECandidate", (config) => {
 		let peer_id = config.peer_id;
 		let ice_candidate = config.ice_candidate;
-		console.log("[" + socket.id + "] relay ICE-candidate to [" + peer_id + "] ", ice_candidate);
+		// console.log("[" + socket.id + "] relay ICE-candidate to [" + peer_id + "] ", ice_candidate);
 
 		if (peer_id in sockets) {
 			sockets[peer_id].emit("iceCandidate", { peer_id: socket.id, ice_candidate: ice_candidate });
@@ -170,7 +170,7 @@ io.sockets.on("connection", (socket) => {
 	socket.on("relaySessionDescription", (config) => {
 		let peer_id = config.peer_id;
 		let session_description = config.session_description;
-		console.log("[" + socket.id + "] relay SessionDescription to [" + peer_id + "] ", session_description);
+		// console.log("[" + socket.id + "] relay SessionDescription to [" + peer_id + "] ", session_description);
 
 		if (peer_id in sockets) {
 			sockets[peer_id].emit("sessionDescription", {

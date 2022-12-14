@@ -124,7 +124,7 @@ const App = new Vue({
 			navigator.mediaDevices
 				.getUserMedia({ video: { deviceId: deviceId } })
 				.then((camStream) => {
-					console.log(camStream);
+					// console.log(camStream);
 
 					this.videoEnabled = true;
 					this.updateUserData("videoEnabled", this.videoEnabled);
