@@ -334,7 +334,7 @@ const getVideoElement = (peerId, isLocal) => {
 	videoWrap.appendChild(fullScreenBtn);
 	videoWrap.appendChild(videoAvatarImg);
 	document.getElementById("videos").appendChild(videoWrap);
-	if(peerId==App.peerId){
+	if(peerId==App.peerId &&  Object.keys(channel).length>0){
 		document.getElementById("videos").removeChild(videoWrap);
 	}
 	return media;
